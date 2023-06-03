@@ -50,6 +50,7 @@ export default class UI {
           || !regExNum.test(score.value)
     ) {
       score.focus();
+      return;
     }
 
     const data = { name: name.value, score: score.value };
