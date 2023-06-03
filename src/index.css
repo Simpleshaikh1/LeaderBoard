@@ -1,0 +1,107 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.leaderSection {
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  gap: 2rem;
+  left: 50%;
+  position: absolute;
+  width: 80%;
+  padding: 2rem;
+  border: 0.5rem solid black;
+  transform: translate(-50%, -50%);
+}
+
+.LeaderContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  padding: 20px;
+}
+
+.leaderSection h1 {
+  text-align: left;
+  font-size: 3rem;
+}
+
+.leaderRightSection,
+.leaderLeftSection,
+.leaderForm {
+  flex-direction: column;
+  display: flex;
+  gap: 3rem;
+}
+
+.leaderRightSection h2 {
+  font-size: xx-large;
+}
+
+.leaderLeftSectionTitle {
+  display: flex;
+  justify-content: space-around;
+}
+
+.leaderForm {
+  width: 80%;
+}
+
+.submit {
+  align-self: flex-end;
+}
+
+.white {
+  background-color: #fff;
+}
+
+.gray {
+  background-color: #efefef;
+}
+
+.refresh,
+.submit {
+  width: 10rem;
+  height: 3rem;
+  font-size: 16px;
+  text-align: center;
+  padding: 5px;
+}
+
+.input-name,
+.input-score {
+  border: 1px solid black;
+  height: 3rem;
+  padding: 2rem;
+}
+
+.liName {
+  width: 80%;
+  margin-right: 20%;
+}
+
+.liScore {
+  width: 80%;
+  margin-right: 20%;
+}
+
+.scoreBoard {
+  overflow: scroll;
+}
+
+.scoreList {
+  border: 1px solid black;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 1% 0% 1% 2%;
+}
