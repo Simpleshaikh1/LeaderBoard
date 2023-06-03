@@ -81,6 +81,16 @@
   padding: 2rem;
 }
 
+.liName {
+  width: 80%;
+  margin-right: 20%;
+}
+
+.liScore {
+  width: 80%;
+  margin-right: 20%;
+}
+
 .scoreBoard {
   overflow: scroll;
 }

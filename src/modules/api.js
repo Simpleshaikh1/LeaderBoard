@@ -1,20 +1,10 @@
 export default class Api {
-  static baseURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
-
-    static Id = localStorage.getItem('ID');
-
-    static apiURL = `games/${Api.Id}/scores/`;
-
-    static url = Api.baseURL + Api.apiURL;
-
-    static gameURL = `${Api.baseURL}games`;
-
     // Create game
-    static createGame = async () => {
-      const response = await fetch(Api.gameURL, {
+    createGame = async (gameName) => {
+      const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
         method: 'POST',
         body: JSON.stringify({
-          name: 'Game of Honor',
+          name: gameName,
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -22,31 +12,31 @@ export default class Api {
       });
 
       const jsonData = await response.json();
-
-      const gameID = await jsonData.result.split(' ')[3];
-      return localStorage.setItem('ID', gameID);
+      return jsonData.result.split(' ')[3];
     };
 
     // Get data
-    static getData = async () => {
-      const res = await fetch(Api.url);
-      const { result } = await res.json();
-      return result;
-    };
-
-    // Post data
-    static postData = async (data) => {
-      const response = await fetch(Api.url, {
+    setScore = async (gameId, name, score) => {
+      await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`, {
         method: 'POST',
         body: JSON.stringify({
-          user: data.name,
-          score: data.score,
+          user: name,
+          score,
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
+    };
+
+    // get scores
+    getAllScores = async (gameId) => {
+      const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`, {
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
       const jsonData = await response.json();
-      return jsonData;
+      return jsonData.result;
     };
 }

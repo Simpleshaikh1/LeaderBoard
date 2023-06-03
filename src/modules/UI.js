@@ -1,61 +1,29 @@
-import Store from './localStorage.js';
-import Api from './api.js';
-
 export default class UI {
-  static scoreList = Store.getScores();
+  constructor() {
+    this.scoreList = JSON.parse(localStorage.getItem('scores')) || [];
+  }
 
-  static showScores = async () => {
-    const scoreList = await Api.getData();
-    const board = document.querySelector('.scoreBoard');
-    board.innerHTML = '';
-    if (scoreList === 0) {
-      board.innerHTML = 'No score to display yet';
-    } else {
-      UI.scoreList.forEach((score, index) => {
-        const scoreListItem = document.createElement('li');
-        scoreListItem.classList.add('scoreList');
+  showScores = async () => {
+    const listOfScores = document.querySelector('.scoreBoard');
+    listOfScores.innerHTML = '';
+    listOfScores.innerHTML = '<li Class="gray" ><span class="liName">Name</span><span class="liScore">| Score</span></li>';
 
-        if ((index + 1) % 2 === 0) {
-          scoreListItem.classList.add('gray');
-        } else {
-          scoreListItem.classList.add('white');
-        }
-
-        const scoreText = `${score.user}: ${score.score}`;
-        scoreListItem.innerHTML = scoreText;
-        board.appendChild(scoreListItem);
-      });
+    for (let i = 0; i < this.scoreList.length; i += 1) {
+      const li = document.createElement('li');
+      if (i % 2) {
+        li.className = 'grey';
+      }
+      li.innerHTML = `<span class="liName">${this.scoreList[i].user}</span><span class="liScore">| ${this.scoreList[i].score}</span>`;
+      listOfScores.appendChild(li);
     }
   };
 
   // Add score
-  static addScore = async (code) => {
-    code.preventDefault();
-
-    const name = document.querySelector('.input-name');
-    const score = document.querySelector('.input-score');
-    const regExNum = /^(d+ )*(d+)$/;
-    const regExAlph = /^[a-zA-Z]+$/;
-
-    if (
-      name.value === ''
-          || !regExAlph.test(name.value)
-    ) {
-      name.focus();
-      return;
-    }
-
-    if (
-      score.value === ''
-          || !regExNum.test(score.value)
-    ) {
-      score.focus();
-      return;
-    }
-
-    const data = { name: name.value, score: score.value };
-    await Api.postData(data);
-    name.value = '';
-    score.value = '';
+  addScore = async (gameScore) => {
+    this.scoreList = gameScore;
+    this.scoreList.sort((a, b) => b.score - a.score);
+    localStorage.setItem('scores', JSON.stringify(this.scoreList));
   };
+
+  getStorage = () => this.scoreList;
 }
