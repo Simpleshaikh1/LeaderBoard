@@ -1,6 +1,5 @@
 export default class Api {
-    static baseURL =
-      'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+  static baseURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
 
     static Id = localStorage.getItem('ID');
 
