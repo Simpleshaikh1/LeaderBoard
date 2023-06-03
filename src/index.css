@@ -57,6 +57,14 @@
   align-self: flex-end;
 }
 
+.white {
+  background-color: #fff;
+}
+
+.gray {
+  background-color: #efefef;
+}
+
 .refresh,
 .submit {
   width: 10rem;
@@ -68,7 +76,22 @@
 
 .input-name,
 .input-score {
+  border: 1px solid black;
   height: 3rem;
   padding: 2rem;
+}
+
+.scoreBoard {
+  overflow: scroll;
+}
+
+.scoreList {
   border: 1px solid black;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 1% 0% 1% 2%;
 }
